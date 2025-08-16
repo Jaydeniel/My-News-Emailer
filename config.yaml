@@ -1,0 +1,72 @@
+# ==== KR/JP News Mailer Configuration ====
+timezone: Asia/Seoul
+
+# --- Feeds: Korea & Japan major outlets (IT/경제/부동산 개발 관련 섹션 위주 RSS 예시) ---
+# 필요에 따라 추가/교체하세요.
+feeds:
+  # Korea
+  - name: Yonhap (경제)
+    url: https://www.yna.co.kr/rss/economy.xml
+  - name: Yonhap (IT/과학)
+    url: https://www.yna.co.kr/rss/it.xml
+  - name: Chosun Biz (경제)
+    url: https://biz.chosun.com/rss/feed.xml
+  - name: Hankyung (한국경제)
+    url: https://www.hankyung.com/feed/all-news
+  - name: Maeil Business (매일경제)
+    url: https://www.mk.co.kr/rss/30200001/  # 경제 종합
+  - name: ETNews (전자신문 IT)
+    url: https://rss.etnews.com/Section901.xml
+  - name: The Bell (부동산/IB)
+    url: https://www.thebell.co.kr/free/content/article_rss.asp
+  - name: KDI 뉴스
+    url: https://www.kdi.re.kr/rss/press.xml
+
+  # Japan
+  - name: Nikkei (경제)
+    url: https://www.nikkei.com/rss/category/economy.xml
+  - name: Nikkei (기업/IT)
+    url: https://www.nikkei.com/rss/category/technology.xml
+  - name: NHK (경제)
+    url: https://www3.nhk.or.jp/rss/news/cat2.xml  # 경제
+  - name: NHK (비즈니스/IT)
+    url: https://www3.nhk.or.jp/rss/news/cat5.xml  # 비즈·IT
+  - name: Asahi (경제)
+    url: https://www.asahi.com/rss/asahi/newsheadlines-economy.rdf
+  - name: Yomiuri (경제)
+    url: https://www.yomiuri.co.jp/rss/economy.xml
+  - name: Nikkei Real Estate (부동산 개발)
+    url: https://realestate.nikkei.co.jp/rss/  # 부동산 기사
+  - name: JLL Japan (리서치/부동산)
+    url: https://www.joneslanglasalle.co.jp/ja/rss
+
+# --- Section filters: include only these topics ---
+# 정규식(대소문자 무시) 목록 중 하나라도 매칭되면 포함
+include_sections:
+  # IT / Technology
+  - "(?i)IT|ICT|테크|기술|과학|디지털|半導体|半導体|半導体|テクノロジー|技術|デジタル|情報通信|AI|生成型?AI|クラウド|5G|IoT|DX"
+  # Real Estate Development / Property
+  - "(?i)부동산|재개발|개발사업|디벨로퍼|리츠|건설|오피스|오피스빌딩|물류센터|데이터센터|용적률|分譲|再開発|不動産|オフィス|複合開発|データセンター|建設"
+  # Economy / Business / Finance
+  - "(?i)경제|경기|물가|금리|환율|수출|수입|무역|고용|소비|기업|투자|증시|금융|정책|거시|景気|物価|金利|為替|輸出|輸入|貿易|雇用|消費|企業|投資|株式|金融|政策|マクロ"
+
+filters:
+  max_age_hours: 48
+  min_title_len: 12
+
+email:
+  from_name: "KR/JP Daily News Bot"
+  from_email: "${MAIL_FROM}"
+  to_emails: ["${MAIL_TO}"]
+  subject_template: "[Daily KR/JP] IT·부동산·경제 주요 뉴스 - {{ date_str }}"
+  smtp_server: smtp.gmail.com
+  smtp_port: 587
+  user: jaydeniel.jeon@gmail.com
+  password: mcli kkhq hfao kmfu  # 앱 비밀번호 사용
+
+summarization:
+  mode: 11m
+  llm_prompt: |
+    당신은 한국어로 간결하게 요약하는 뉴스 도우미입니다.
+    각 기사를 1~2개의 핵심 불릿으로 요약하고, 수치/날짜/기관명 등 팩트를 보존하세요.
+    과장 없이 간결하게 작성하며, 한국과 일본 맥락을 구분해 주세요.

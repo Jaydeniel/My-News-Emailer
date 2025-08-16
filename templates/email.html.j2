@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ subject }}</title>
+  </head>
+  <body>
+    <h2>{{ subject }}</h2>
+    <p><em>수집 기간: {{ window_str }}</em></p>
+    {% for region, blocks in grouped.items() %}
+      <h2>{{ region }}</h2>
+      {% for feed_name, items in blocks.items() %}
+        <h3>{{ feed_name }}</h3>
+        <ol>
+        {% for it in items %}
+          <li>
+            <a href="{{ it.link }}">{{ it.title }}</a><br/>
+            {% if it.bullets %}
+              <ul>
+              {% for b in it.bullets %}
+                <li>{{ b }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            <small>{{ it.when }}</small>
+          </li>
+        {% endfor %}
+        </ol>
+      {% endfor %}
+    {% endfor %}
+  </body>
+</html>
