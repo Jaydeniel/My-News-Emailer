@@ -8,7 +8,9 @@ feeds:
   - name: Yonhap (경제)
     url: https://www.yna.co.kr/rss/economy.xml
   - name: Yonhap (IT/과학)
-    url: https://www.yna.co.kr/rss/it.xml
+    url: https://www.yna.co.kr/rss/industry.xml
+  - name : Yonhap (세계)
+    url: https://www.yna.co.kr/rss/international.xml
   - name: Chosun Biz (경제)
     url: https://biz.chosun.com/rss/feed.xml
   - name: Hankyung (한국경제)
@@ -21,6 +23,13 @@ feeds:
     url: https://www.thebell.co.kr/free/content/article_rss.asp
   - name: KDI 뉴스
     url: https://www.kdi.re.kr/rss/press.xml
+  - name: Financial News (부동산)
+    url: https://www.fnnews.com/rss/fn_realnews_realestate.xml
+  - name: Financial News (경제)
+    url: http://www.fnnews.com/rss/fn_realnews_economy.xml
+  - name: Financial News (IT/과학)
+    url: http://www.fnnews.com/rss/fn_realnews_it.xml
+
 
   # Japan
   - name: Nikkei (경제)
