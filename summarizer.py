@@ -35,8 +35,13 @@ def llm_bullets(title: str, summary: str, source: str, system_prompt: str) -> Li
         resp = requests.post(f"{base_url}/chat/completions", json=payload, timeout=30, headers=headers)
         resp.raise_for_status()
         out = resp.json()
+        # 응답 구조 확인 및 디버깅 메시지 추가
+        if "choices" not in out or not out["choices"]:
+            print("OpenAI 응답에 choices가 없습니다:", out)
+            return simple_bullets(title, summary, source)
         content = out["choices"][0]["message"]["content"].strip()
         bullets = [line.strip("•- ").strip() for line in content.splitlines() if line.strip()]
         return bullets[:3] if bullets else simple_bullets(title, summary, source)
-    except Exception:
+    except Exception as e:
+        print("llm_bullets 예외:", e)
         return simple_bullets(title, summary, source)
